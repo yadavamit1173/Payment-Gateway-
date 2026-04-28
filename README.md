@@ -15,3 +15,31 @@ User clicks Pay
 -> Backend updates DB
 -> PG also sends Webhook
 -> Backend confirms final status from webhook
+
+
+Retry Method
+User clicks Pay
+-> Backend creates internal order
+-> Backend calls PG create-order
+-> PG timeout
+-> Backend checks DB/idempotency key
+-> Retry with same receipt/idempotency key
+-> If still unknown, mark PG_CREATE_PENDING
+-> Background job checks PG status
+
+1. Timeout ka matlab failure nahi hota
+Backend -> PG request sent
+-> PG ne order create kar diya
+-> But response backend tak nahi aaya
+
+3. Correct way ✅ Use Idempotency Key
+
+Idempotency key ka matlab:
+Same operation ka unique key
+-> repeat request aaye to same result mile
+-> duplicate operation na ho
+
+First request timeout
+-> Retry with same idempotency key
+-> PG says same operation already processed
+-> returns same pg_order_id
