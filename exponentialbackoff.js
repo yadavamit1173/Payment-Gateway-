@@ -1,12 +1,3 @@
-async function createPgOrder() {
-  return paymentGateway.orders.create({
-    amount: 50000,
-    currency: 'INR'
-  })
-}
-
-const pgOrder = await retryWithBackoff(createPgOrder)
-
 async function retryWithBackoff(fn, maxRetries = 3) {
   let delay = 300
 
