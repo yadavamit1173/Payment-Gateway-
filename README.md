@@ -43,3 +43,12 @@ First request timeout
 -> Retry with same idempotency key
 -> PG says same operation already processed
 -> returns same pg_order_id
+
+
+
+
+Request
+→ DB checks stock >= 1
+→ DB reduces stock in same operation
+→ If affected rows = 1, success
+→ If affected rows = 0, out of stock
