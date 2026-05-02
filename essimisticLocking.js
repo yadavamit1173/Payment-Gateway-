@@ -14,6 +14,7 @@ await client.query(
   [quantity, productId]
 );
 
+
 await client.query('COMMIT');
 
 /*
