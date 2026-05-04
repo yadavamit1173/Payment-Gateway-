@@ -5,6 +5,8 @@ const product = await client.query(
   [productId]
 );
 
+
+  
 if (product.rows[0].stock < quantity) {
   throw new Error('Out of stock');
 }
