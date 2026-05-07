@@ -11,6 +11,7 @@ CREATE TABLE outbox_events (
 
 */
 
+
 async function publishOutboxEvents() {
   const events = await db.query(`
     SELECT * FROM outbox_events
